@@ -18,7 +18,7 @@ block content
             each saat in mekanDetay.saatler 
               p 
                 | &nbsp;#{saat.gunler}:
-                if (!saat.kapali)
+                if (saat.kapali)
                   | Kapalı
                 else
                   | #{saat.acilis}-#{saat.kapanis}
