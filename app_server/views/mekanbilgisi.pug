@@ -10,32 +10,32 @@ block content
         .col-xs-12.col-sm-6 
           p.rating 
              +puanOlustur(mekanDetay.puan)
-          p SurYapıPark AVM 
+          p #{mekanDetay.adres}
           .panel.panel-primary 
             .panel-heading 
               h2.panel-title Açılış Saatleri
-            .panel-body 
+            .panel-body
+            each saat in mekanDetay.saatler 
               p 
-                | Pazartesi-Cuma: 6:00-21:00
-              p 
-                | Cumartesi-Pazar: 8:00-23:59
+                | &nbsp;#{saat.gunler}:
+                if (!saat.kapali)
+                  | Kapalı
+                else
+                  | #{saat.acilis}-#{saat.kapanis}
           .panel.panel-primary 
             .panel-heading 
               h2.pane-title Menüde Neler Var?
             .panel-body 
-              span.label.label-warning Dünya Tatlıları 
-              | &nbsp;
-              span.label.label-warning Kekler 
-              | &nbsp;
-              span.label.label-warning Pastalar 
-              | &nbsp;
+              each imkan in mekanDetay.imkanlar 
+                span.label.label-warning #{imkan}
+                | &nbsp;
         .col-xs-12.col-sm-6 
           .panel.panel-primary 
             .panel-heading 
               h2.panel-title Konum Bilgisi 
             .panel-body 
-              -var enlem=37.78
-              -var boylam=30.56
+              -var enlem=mekanDetay.koordinatlar.enlem
+              -var boylam=mekanDetay.koordinatlar.boylam
               img.img-responsive.img-rounded(src='http://maps.googleapis.com/maps/api/staticmap?center='+enlem+','+boylam+'&zoom=12&size=600x400&markers='+enlem+','+boylam+'&key=AIzaSyCmmKygTpBzHGOZEciJpAdxC9v_tWHagnE')
   .row 
     .col-xs-12 
@@ -44,16 +44,13 @@ block content
           a.btn.btn-default.pull-right(href='/mekan/yorum/yeni') Yorum Ekle 
           h2.panel-title Müşteri Yorumları
         .panel-body.review-container 
-          .row 
-            .review 
-              .well.well-sm.review-header 
-                span.rating 
-                span.glyphicon.glyphicon-star
-                span.glyphicon.glyphicon-star
-                span.glyphicon.glyphicon-star
-                span.glyphicon.glyphicon-star
-                span.glyphicon.glyphicon-star-empty
-                span.review-author Hakan Körhasan
-                small.reviewTimestamp &nbsp; 13 Ekim 2022
-              .col-xs-12 
-                p Kahveler çok kötü.
+          each yorum in mekanDetay.yorumlar
+            .row 
+              .review 
+                .well.well-sm.review-header 
+                  span.rating 
+                    +puanOlustur(yorum.puan) 
+                  span.review-author &nbsp; #{yorum.yorumYapan}
+                  small.reviewTimestamp &nbsp; #{yorum.tarih}
+                .col-xs-12 
+                  p #{yorum.yorumMetni}.
