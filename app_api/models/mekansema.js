@@ -24,4 +24,4 @@ var mekanSema = new mongoose.Schema({
   yorumlar: [yorumSema],
 });
 
-mongoose.model = ("mekan", mekanSema, "mekanlar");
+mongoose.model("mekan", mekanSema, "mekanlar");
