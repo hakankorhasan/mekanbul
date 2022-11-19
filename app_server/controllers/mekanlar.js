@@ -80,13 +80,15 @@ const mekanBilgisi = function (req, res, next) {
       'saatler' : [
         {
           'gunler' : 'Pazartesi-Cuma',
-          'acilis' : '9:00-23:00',
-          'kapali' : 'false'
+          'acilis' : '9:00',
+          'kapanis' : "23:00",
+          'kapali' : false
         },
         {
           'gunler' : 'Cumartesi-Pazar',
-          'acilis' : '8:00-24:00',
-          'kapali' : 'true'
+          'acilis' : '8:00',
+          'kapanis' : "24:00",
+          'kapali' : false
         },
       ],
       'imkanlar' : ["Coffee",'Tea','Cake'],
