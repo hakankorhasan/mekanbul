@@ -1,6 +1,7 @@
 var mongoose = require("mongoose");
-var dbUrl = 'mongodb://localhost/mekanbul';
-   // "mongodb+srv://hakankorhasan:1234@mekanbul.civlwxs.mongodb.net/?retryWrites=true&w=majority";
+//var dbUrl = //'mongodb://localhost/mekanbul';
+   // "mongodb+srv://hakankorhasan:1234@mekanbul.civlwxs.mongodb.net/mekanbul?retryWrites=true&w=majority";
+var dbUrl = "mongodb+srv://hakankorhasan:1234@mekanbul.civlwxs.mongodb.net/mekanbul?retryWrites=true&w=majority"
 require("./mekansema");
 mongoose.connect(dbUrl);
 

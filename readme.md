@@ -1,0 +1,1 @@
+https://mekanbul.hakankorhasann.repl.co/api/mekanlar/6375fd67328f14f2e154435b
