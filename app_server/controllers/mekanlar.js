@@ -94,8 +94,8 @@ const mekanBilgisi = function (req, res, next) {
       'imkanlar' : ["Coffee",'Tea','Cake'],
       'koordinatlar' : 
       {
-        'enlem' : '37.82150',
-        'boylam' : '30.53642'
+        'enlem' : '37.7',
+        'boylam' : '35.4'
       },
       'yorumlar' : [
         {
