@@ -11,8 +11,8 @@ db.mekanlar.insertOne(
     "Pastalar"
   ],
   "koordinat": [
-    37.7,
-    30.5
+    37.8,
+    35.4
   ],
   "saatler": [
     {
