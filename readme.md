@@ -9,6 +9,8 @@
 3. [Bir Mekana Ait Belirli Bir Yorumu Getir](https://mekanbul-2.hakankorhasann.repl.co/api/mekanlar/637a79dd153d13f539f8699e/yorumlar/637a79e62ff192c61164fe4f)
 ![Bir Mekana Ait Belirli Bir Yorumu Getir](./resimler/yorumlar.png)
 
-4. ![Test sonuçları](./resimler/test.png)
+4. Test Sonuçları
+ ![](./resimler/test.png)
+ ![](./resimler/test2.png)
 
 

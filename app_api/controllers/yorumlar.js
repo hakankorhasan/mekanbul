@@ -40,10 +40,10 @@ var yorumOlustur = function(req,res,gelenMekan){
     }
     else{
         gelenMekan.yorumlar.push({
-            yorumYapan: req.body.yorumYapan,
-            puan: req.body.puan,
-            yorumMetni: req.body.yorumMetni,
-            tarih: Date.now()
+            yorumYapan:req.body.yorumYapan,
+            puan:req.body.puan,
+            yorumMetni:req.body.yorumMetni,
+            tarih:Date.now()
         });
         gelenMekan.save(function(hata,mekan){
             var yorum;

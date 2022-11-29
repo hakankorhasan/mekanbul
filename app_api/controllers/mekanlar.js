@@ -161,9 +161,9 @@ const mekanSil = function(req, res) {
 };
 
 module.exports = {
+    mekanlariListele,
     mekanEkle,
     mekanGetir,
     mekanGuncelle,
-    mekanSil,
-    mekanlariListele
+    mekanSil
 }
