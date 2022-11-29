@@ -25,6 +25,6 @@ router
    .route("/mekanlar/:mekanid/yorumlar/:yorumid")
    .get(ctrlYorumlar.yorumGetir)
    .put(ctrlYorumlar.yorumGuncelle)
-   .post(ctrlYorumlar.yorumSil);
+   .delete(ctrlYorumlar.yorumSil);
 
 module.exports = router;
