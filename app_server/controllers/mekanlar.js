@@ -1,71 +1,60 @@
 var express = require("express");
+var router = express.Router();
+const axios = require("axios")
+var apiSecenekleri={
+  sunucu : "http://localhost:3000",
+  apiYolu : "/api/mekanlar/"
+}
+
+var mesafeyiFormatla=function(mesafe){
+  var yeniMesafe, birim;
+  if(mesafe>1){
+    yeniMesafe=parseFloat(mesafe).toFixed(1);
+    birim=" km";
+  }else{
+    yeniMesafe=parseInt(mesafe*1000,10);
+    birim=" m";
+  }
+  return yeniMesafe+birim;
+}
+
+var anaSayfaOlustur=function(res,mekanListesi){
+  var mesaj;
+  if(!(mekanListesi instanceof Array)){
+    mesaj:"API HATASI: birşeyler ters gitti.";
+    mekanListesi=[];
+  }else{
+    if(!(mekanListesi.lenght)){
+      mesaj:"Civarda herhangi bir mekan yok";
+    }
+  }
+  res.render("anasayfa",{
+    "baslik":"Anasayfa",
+    sayfaBaslik:{
+      "siteAd":"Mekanbul",
+      "slogan":"Mekanları Keşfet"
+    },
+    mekanlar:mekanListesi,
+    mesaj:mesaj
+  });
+}
 
 /* GET home page. */
 const anaSayfa = function (req, res, next) {
-  res.render("anasayfa",
-   {
-    'baslik' : 'Homepage' ,
-    'sayfaBaslik' : {
-      'siteAd' : 'MekanBul' ,
-      'slogan' : 'Civardaki Mekanları Keşfet'
-    },
-    'mekanlar' : [
-      {
-        'ad' : 'Starbucks',
-        'puan' : 3,
-        'adres' : 'SurYapı Park Avm',
-        'imkanlar' : [
-          'Coffee',
-          'Tea',
-          'Cake'
-        ],
-        'mesafe' : '10 Km'
-      },
-      {
-        'ad' : 'HollyStone',
-        'puan' : 3,
-        'adres' : 'SurYapı Park Avm',
-        'imkanlar' : [
-          'Beer',
-          'Whiskey',
-          'Wine'
-        ],
-        'mesafe' : '120 Km'
-      },
-      {
-        'ad' : 'Irısh',
-        'puan' : 5,
-        'adres' : 'SurYapı Park Avm',
-        'imkanlar' : [
-          'Beer',
-          'Whiskey',
-          'Wine'
-        ],
-        'mesafe' : '5 Km'
-      },
-      {
-        'ad' : 'Sur Winston Pub',
-        'puan' : 1,
-        'adres' : 'SurYapı Park Avm',
-        'imkanlar' : [
-          'Beer',
-          'Whiskey',
-          'Wine'
-        ],
-        'mesafe' : '3 Km'
-      },
-      {
-        'ad' : 'Arabica',
-        'puan' : 3,
-        'adres' : 'SurYapı Park Avm',
-        'imkanlar' : [
-          'Coffee',
-          'Ice Coffee',
-          'Tea'
-        ],
-        'mesafe' : '750 M'
-      },
-    ]
+  axios.get(apiSecenekleri.sunucu+apiSecenekleri.apiYolu, {
+    params:{
+      enlem:req.query.enlem,
+      boylam:req.query.boylam
+    }
+  }).then(function(response){
+    var i, mekanlar;
+    mekanlar = response.data;
+    for(i=0; i<mekanlar.length; i++){
+      mekanlar[i].mesafe = mesafeyiFormatla(mekanlar[i].mesafe);
+    }
+    anaSayfaOlustur(res, mekanlar);
+  }).catch(function(hata){
+    anaSayfaOlustur(res,hata);
   });
 }
 

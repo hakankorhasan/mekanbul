@@ -2,8 +2,8 @@ const database = 'mekanbul';
 use(database);
 db.mekanlar.insertOne(
   {
-  "ad": "Starbucks",
-  "adres": "Centrum Garden AVM",
+  "ad": "Gloria Jeans",
+  "adres": "Iyaş Garden AVM",
   "puan": "4",
   "imkanlar": [
     "Dünya Kahveleri",

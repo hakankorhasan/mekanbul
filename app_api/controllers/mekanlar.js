@@ -27,7 +27,7 @@ const mekanlariListele = async(req, res) => {
         coordinates: [enlem, boylam],
     };
     var geoOptions = {
-        distanceField: "Mesafe",
+        distanceField: "mesafe",
         spherical: true,
     };
     if ((!enlem && boylam !==0) || (!enlem && boylam !== 0)) {
