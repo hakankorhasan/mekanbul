@@ -2,19 +2,19 @@
 const axios = require("axios")
 var apiSecenekleri = {
   sunucu: "http://localhost:3000",
-  apiYolu: "/api/mekanlar/",
+  apiYolu: "/api/mekanlar/"
 }
 
-var mesafeyiFormatla=function(mesafe){
+var mesafeyiFormatla = function(mesafe){
   var yeniMesafe, birim;
-  if(mesafe>1){
-    yeniMesafe=parseFloat(mesafe).toFixed(1);
-    birim=" km";
+  if(mesafe > 1){
+    yeniMesafe = parseFloat(mesafe).toFixed(1);
+    birim = " km";
   }else{
-    yeniMesafe=parseInt(mesafe*1000,10);
-    birim=" m";
+    yeniMesafe = parseInt(mesafe*1000,10);
+    birim = " m";
   }
-  return yeniMesafe+birim;
+  return yeniMesafe + birim;
 }
 
 var anaSayfaOlustur=function(res,mekanListesi){
