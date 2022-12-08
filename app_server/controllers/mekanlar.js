@@ -1,8 +1,9 @@
 
-const axios = require("axios")
+const axios = require("axios");
+const { resource } = require("../../app");
 var apiSecenekleri = {
-  sunucu: "https://mekanbul.hakankorhasann.repl.co",
-  //sunucu: "http://localhost:3000",
+  //sunucu: "https://mekanbul.hakankorhasann.repl.co",
+  sunucu: "http://localhost:3000",
   apiYolu: "/api/mekanlar/"
 }
 
@@ -88,6 +89,7 @@ var hataGoster = function(res, hata){
 const mekanBilgisi = function (req, res, next) {
   axios.get(apiSecenekleri.sunucu + apiSecenekleri.apiYolu + req.params.mekanid)
     .then(function (response) {
+      req.session.mekanAdi = response.data.ad;
       detaySayfasiOlustur(res, response.data)
     })
     .catch(function (hata) {
@@ -96,11 +98,38 @@ const mekanBilgisi = function (req, res, next) {
 }
 
 const yorumEkle = function (req, res, next) {
-  res.render("yorumekle", { title: "Yorum Ekle" });
+  var mekanAdi = req.session.mekanAdi;
+  var mekanid=req.params.mekanid;
+  if(!mekanid){
+    res.redirect("/mekan/"+mekanid);//yönlendirme 
+  }else{
+
+  }
+  res.render("yorumekle", { "baslik":mekanAdi+" Mekanına Yorum Ekle", title: "Yorum Sayfası" });
+};
+
+const yorumumuEkle = function (req, res) {
+  var gonderilenYorum, mekanid;
+  mekanid = req.params.mekanid;
+  if(!req.body.adsoyad || !req.body.yorum){
+    res.redirect("/mekanid/"+mekanid+"/yorum/yeni?hata?=evet"); // o sayfada hata oldu mu olmadı mı öğrenmek için hata=evet ekleriz
+  }
+  else{
+    gonderilenYorum = {
+      yorumYapan: req.body.adsoyad, //sol taraf veritabanında tanımlanan hali
+      puan: req.body.puan,
+      yorumMetni: req.body.yorum
+    }
+    axios.post(apiSecenekleri.sunucu+apiSecenekleri.apiYolu+mekanid+"/yorumlar",
+    gonderilenYorum).then(function (){
+      res.redirect("/mekan/"+mekanid);
+    });//then baaşrılı olduktan sonra napcağımızıa kara verir
+  }
 };
 
 module.exports = {
   anaSayfa,
   mekanBilgisi,
-  yorumEkle
+  yorumEkle,
+  yorumumuEkle
 }
