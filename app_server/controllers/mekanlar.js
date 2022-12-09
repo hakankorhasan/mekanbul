@@ -2,8 +2,8 @@
 const axios = require("axios");
 const { resource } = require("../../app");
 var apiSecenekleri = {
-  //sunucu: "https://mekanbul.hakankorhasann.repl.co",
-  sunucu: "http://localhost:3000",
+  sunucu: "https://mekanbul.hakankorhasann.repl.co",
+  //sunucu: "http://localhost:3000",
   apiYolu: "/api/mekanlar/"
 }
 
